@@ -98,4 +98,13 @@ class File extends FSObject implements FSObjectInterface
         return $this->file_path;
     }
 
+    public function getExt(){
+        if (strlen($this->getName()) > 0){
+            $fname = explode('.', $this->getName());
+            return array_pop($fname);
+        } else {
+            return '';
+        }
+    }
+
 }
