@@ -49,5 +49,12 @@ abstract class FSObject {
 	public function getPath(){
 		return $this->file_path;
 	}
-	
+
+    public function getModifyTime(){
+        if (!$this->exists()){
+            throw new FSException('File (directory) does not exist.', $this->file_path);
+        }
+        return filemtime($this->file_path);
+    }
+
 }

@@ -57,7 +57,14 @@ class File extends FSObject implements FSObjectInterface
         if (!is_writable($new_file_path)) {
             throw new FSException('File is not writable.', $new_file_path);
         }
+        $new_file_path = strpos($new_file_path, FS::root()) === 0 ? $new_file_path : ( FS::root() . $new_file_path );
         copy($this->file_path, $new_file_path);
+        return $this;
+    }
+
+    public function rename($new_file_name){
+        $this->move($this->getLocation() . '/' . $new_file_name);
+        $this->file_path = $this->getLocation() . '/' . $new_file_name;
         return $this;
     }
 
