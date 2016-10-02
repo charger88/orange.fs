@@ -1,0 +1,17 @@
+{
+  "name": "charger88/orange.fs",
+  "description": "Library for work with files and directories.",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Mikhail Kelner",
+      "email": "mikhail.kelner@gmail.com"
+    }
+  ]
+}
