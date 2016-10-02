@@ -32,6 +32,10 @@ class File extends FSObject implements FSObjectInterface
 
     public function save($data, $add = false)
     {
+        $location = new Dir($this->getLocation());
+        if (!$location->exists()){
+            $location->create();
+        }
         if (
             ($this->exists() && !is_writable($this->file_path)) ||
             (!$this->exists() && !is_writable($this->getLocation()))
