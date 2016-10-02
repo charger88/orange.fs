@@ -125,4 +125,17 @@ class File extends FSObject implements FSObjectInterface
         return filesize($this->file_path);
     }
 
+    public function saveUpload($tmp_file_name){
+        $dir = new Dir($this->getLocation());
+        if (!$dir->exists()){
+            $dir->create();
+        }
+        if (@move_uploaded_file($tmp_file_name, $this->file_path)){
+            @chmod($this->file_path, 0644);
+        } else {
+            throw new FSException('File uploading was failed.');
+        }
+        return $this;
+    }
+
 }
