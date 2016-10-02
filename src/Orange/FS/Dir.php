@@ -46,16 +46,22 @@ class Dir extends FSObject implements FSObjectInterface {
     }
 
     public function remove(){
+        $this->clear();
+        $res = @rmdir($this->file_path);
+        if (!$res){
+            throw new FSException('Directory removing was failed.', $this->file_path);
+        }
+        return $this;
+    }
+
+
+    public function clear(){
         if (!$this->exists()) {
             throw new FSException('Directory does not exist.', $this->file_path);
         }
         $files = $this->readDir();
         foreach ($files as $file){
             $file->remove();
-        }
-        $res = @rmdir($this->file_path);
-        if (!$res){
-            throw new FSException('Directory removing was failed.', $this->file_path);
         }
         return $this;
     }
