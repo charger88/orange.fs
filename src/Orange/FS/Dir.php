@@ -59,5 +59,24 @@ class Dir extends FSObject implements FSObjectInterface {
         }
         return $this;
     }
+
+    public function getDirInfo(){
+        $count = $size = 0;
+        if (!$this->exists()) {
+            throw new FSException('Directory does not exist.', $this->file_path);
+        }
+        $dirFiles = $this->readDir();
+        foreach ($dirFiles as $file){
+            if ($file instanceof Dir){
+                list($fCount,$fSize) = $file->getDirInfo();
+                $count += $fCount;
+                $size += $fSize;
+            } else {
+                $count++;
+                $size += $file->getFileSize();
+            }
+        }
+        return array($count,$size);
+    }
 	
 }
