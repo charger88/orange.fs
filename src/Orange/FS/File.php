@@ -34,7 +34,6 @@ class File extends FSObject implements FSObjectInterface
     {
         $location = new Dir($this->getLocation());
         if (!$location->exists()){
-            var_dump($location);
             $location->create();
         }
         if (
