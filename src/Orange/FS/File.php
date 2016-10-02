@@ -118,4 +118,11 @@ class File extends FSObject implements FSObjectInterface
         }
     }
 
+    public function getFileSize(){
+        if (!$this->exists()) {
+            throw new FSException('File does not exist.', $this->file_path);
+        }
+        return filesize($this->file_path);
+    }
+
 }
