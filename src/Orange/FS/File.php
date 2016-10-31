@@ -73,7 +73,7 @@ class File extends FSObject implements FSObjectInterface
         if (!$this->exists()) {
             throw new FSException('File does not exist.', $this->file_path);
         }
-        if (!is_writable($new_file_path)) {
+		if (is_file(FS::root() . $new_file_path) && !is_writable(FS::root() . $new_file_path)) {
             throw new FSException('File is not writable.', $new_file_path);
         }
         $this->cp($new_file_path);
