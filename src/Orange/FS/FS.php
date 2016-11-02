@@ -15,11 +15,11 @@ class FS {
 	}
 
 	public static function name($file_path){
-		return strpos(static::root(), $file_path) === 0 ? $file_path : ( static::root() . $file_path );
+		return strpos($file_path . '/', static::root()) === 0 ? $file_path : ( static::root() . $file_path );
 	}
 
 	public static function open($file_path){
-		$file_path = strpos($file_path . '/', FS::root()) === 0 ? $file_path : ( FS::root() . $file_path );
+		$file_path = static::name($file_path);
 		if (is_file($file_path)){
 			return new File($file_path);
 		} else if (is_dir($file_path)){
