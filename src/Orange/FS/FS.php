@@ -15,7 +15,7 @@ class FS {
 	}
 
 	public static function name($file_path){
-		return strpos($file_path, static::root()) === 0 ? $file_path : ( static::root() . $file_path );
+		return strpos(static::root(), $file_path) === 0 ? $file_path : ( static::root() . $file_path );
 	}
 
 	public static function open($file_path){
